@@ -1,29 +1,36 @@
-
-function checkLatestVersion()
-    local url = "https://github.com/Bibiflox/Bibi-VehiculeControle"
-    
-    PerformHttpRequest(url, function(statusCode, resultData, headers)
-        local data = json.decode(resultData)
-
-        if data and data.object and data.object.sha then
-            local latestCommitSha = data.object.sha
-            local currentCommitSha = GetCurrentCommitSha() 
-
-            if latestCommitSha == currentCommitSha then
-                print("Script Vehiculecontrole à jour !")
-            else
-                print("Une nouvelle version de Vehiculecontrole est disponible.
-                https://github.com/Bibiflox/Bibi-VehiculeControle")
+vehiculecontrole.Functions.GetVersionScript = function(CURRENT_VERSION, SCRIPT_NAME)
+    PerformHttpRequest("https://github.com/Bibiflox/Bibi-VehiculeControle/main/versions.json", function (_, data, __)
+        if data ~= nil then
+            local SCRIPT_LIST = json.decode(data)
+            for _, value in pairs ( SCRIPT_LIST ) do 
+                if value.name == SCRIPT_NAME then
+                    if value.version == CURRENT_VERSION then
+                        print("^2[" ..SCRIPT_NAME.. "] VERSION IS LATEST\n[" ..SCRIPT_NAME.. "] VERSION TITLE ^3" .. value.version_name.."^2\n".."[" ..SCRIPT_NAME.. "] ^3" .. value.version_desc.."^2.^7")
+                    else
+                        print("^8[" ..SCRIPT_NAME.. "] ^1IS OUTDATED, NEEDS TO BE UPDATED!^8\n[" ..SCRIPT_NAME.. "] ^1LATEST VERSION IS^8 ^3" .. value.version .. "^8.^7")
+                        vehiculecontrole.Functions.CreateUpdateLoop("^8[" ..SCRIPT_NAME.. "] ^1IS OUTDATED, NEEDS TO BE UPDATED!^8\n[" ..SCRIPT_NAME.. "] ^1LATEST VERSION IS^8 ^3" .. value.version .. "^8.^7")
+                    end
+                end
             end
         else
-            print("Impossible de vérifier la version depuis GitHub.")
+            print("[VehiculeControle] Les versions ne sont pas accessibles. Attendez s'il vous plaît et ne dérangez pas le développeur, cela passera bientôt !")
         end
-    end, 'GET', '', {['Content-Type'] = 'application/json'})
+    end)
 end
 
+vehiculecontrole.Functions.CreateUpdateLoop = function(PRINT)
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(60000)
+            print(PRINT)
+        end
+    end)
+end
 
-AddEventHandler('onResourceStart', function(resourceName)
-    if GetCurrentResourceName() == resourceName then
-        checkLatestVersion()
-    end
+Citizen.CreateThread(function()
+    Citizen.Wait(500)
+    vehiculecontrole.Functions.GetVersionScript(GetResourceMetadata("ls-core", "version"), "ls-core")
 end)
+
+exports("CheckVersion", vehiculecontrole.Functions.GetVersionScript)
+

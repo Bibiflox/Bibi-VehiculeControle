@@ -2,6 +2,7 @@
 
 Salut, merci d'avoir téléchargé mon script. J'espère qu'il te plaira. Il permet de gérer les clignotants des véhicules et d'utiliser un régulateur de vitesse. Je prévois probablement de l'améliorer en ajoutant une ceinture et un HUD à l'avenir, selon l'utilisation de mon script.
 
+Script Gratuit merci de ne pas le copier/vendre
 
 ## CONTROLE
 
@@ -23,7 +24,7 @@ Merci de me contacter via Discord pour toute demande d'aide ou d'amélioration.
 
 ## Téléchargement
 
-Click [here](https://github.com/Bibiflox/Bibi-VehiculeControle) to go to the releases page and download the latest release
+Cliquez [ici](https://github.com/Bibiflox/Bibi-VehiculeControle) pour accéder à la page des versions et télécharger la dernière version disponible.
 
 
 

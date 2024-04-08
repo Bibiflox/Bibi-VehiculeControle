@@ -17,5 +17,6 @@ server_scripts {
 client_script 'client/client.lua'
 
 files {
-    'update.lua'
+    'Update.lua',
+    'versions.json'
 }
