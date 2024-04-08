@@ -15,8 +15,3 @@ server_scripts {
 }
 
 client_script 'client/client.lua'
-
-files {
-    'Update.lua',
-    'versions.json'
-}
