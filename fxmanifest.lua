@@ -4,14 +4,18 @@ game 'gta5'
 
 author 'Bibiflox'
 version '1.0'
-description 'Script pour voiture de BibiFlox'
+description 'véhiculeControl de BibiFlox'
 
 
 
 server_scripts {
     '@mysql-async/lib/MySQL.lua',
-    'server.lua'
+    'serveur/server.lua'
 
 }
 
-client_script 'client.lua'
+client_script 'client/client.lua'
+
+files {
+    'update.lua'
+}
